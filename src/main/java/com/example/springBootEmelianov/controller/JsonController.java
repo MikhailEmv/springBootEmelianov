@@ -18,7 +18,7 @@ public class JsonController {
     private final MyService myService;
 
     @PatchMapping("send")
-    public MyDto sendToService(@RequestBody MyDto myDto) {
+    public MyDto getServiceWork(@RequestBody MyDto myDto) {
         return myService.addId(myDto);
     }
 

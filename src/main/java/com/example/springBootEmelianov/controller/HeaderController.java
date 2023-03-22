@@ -1,14 +1,12 @@
 package com.example.springBootEmelianov.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/headers")
+@RequestMapping("headers")
 public class HeaderController {
 
     @GetMapping("/getAllHeaders")

@@ -1,31 +1,31 @@
 package com.example.springBootEmelianov.advice;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestControllerAdvice
 public class MyExceptionHandler {
 
     @ExceptionHandler(BindException.class)
-    public ResponseEntity<List<String>> handleBindException(BindException ex) {
-        List<String> errors = new ArrayList<>();
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public List<Map<String, String>> handleBindException(BindException ex) {
 
-        for (ObjectError error : ex.getBindingResult().getAllErrors()) {
-            if (error instanceof FieldError) {
-                errors.add(((FieldError) error).getField() + ": " + error.getDefaultMessage());
-            } else {
-                errors.add(error.getDefaultMessage());
-            }
-        }
+        List<Map<String, String>> errors = new ArrayList<>();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        ex.getFieldErrors().forEach(error -> {
+            Map<String, String> errorDetails = new HashMap<>();
+            errorDetails.put("field", error.getField());
+            errorDetails.put("message", error.getDefaultMessage());
+            errors.add(errorDetails);
+        });
+        return errors;
     }
 }

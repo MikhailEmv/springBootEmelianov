@@ -4,7 +4,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.lang.annotation.*;
 
 @Target(ElementType.FIELD)

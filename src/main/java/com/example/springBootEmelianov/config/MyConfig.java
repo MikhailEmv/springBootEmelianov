@@ -29,7 +29,7 @@ public class MyConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name = "EXAMPLE_TEST", havingValue = "!default", matchIfMissing = true)
+    @ConditionalOnProperty(name = "EXAMPLE_TEST", havingValue = "!default")
     public MyConditionalPropertyBean myConditionalPropertyBean() {
         return new MyConditionalPropertyBean();
     }

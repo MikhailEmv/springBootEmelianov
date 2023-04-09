@@ -4,6 +4,7 @@ import com.example.springBootEmelianov.beans.MyConditionalPropertyBean;
 import com.example.springBootEmelianov.beans.MyTestBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ public class MyConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name = "EXAMPLE_TEST", havingValue = "!default")
+    @ConditionalOnExpression("${EXAMPLE_TEST != 'default'}")
     public MyConditionalPropertyBean myConditionalPropertyBean() {
         return new MyConditionalPropertyBean();
     }
